@@ -23,7 +23,7 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://tu-dominio.vercel.app"),
+  metadataBase: new URL("https://saas-admin-flax.vercel.app"),
   title: {
     default: "Nimbus — Panel de control para SaaS",
     template: "%s · Nimbus",
