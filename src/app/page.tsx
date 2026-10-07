@@ -241,7 +241,7 @@ export default async function HomePage() {
           <h2 className="font-display text-3xl italic">Probalo, es gratis.</h2>
           <Link
             href="/sign-up"
-            className="rounded-full bg-signal px-5 py-2 font-medium text-signal-ink transition hover:scale-105 hover:opacity-90 active:scale-95"
+            className="mt-6 inline-block rounded-full bg-signal px-6 py-3 text-sm font-medium text-signal-ink transition hover:scale-105 hover:opacity-90 active:scale-95"
           >
             Crear cuenta
           </Link>
