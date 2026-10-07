@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { auth } from "@clerk/nextjs/server";
+import { Faq } from "@/components/landing/Faq";
 
 const CONSOLE_STATS = [
   { label: "MRR", value: "$42,890" },
@@ -8,6 +9,68 @@ const CONSOLE_STATS = [
 ];
 
 const CONSOLE_BARS = [30, 45, 38, 52, 61, 55, 70, 64, 78, 72, 85, 90];
+
+const STEPS = [
+  {
+    number: "01",
+    title: "Conectá tus datos",
+    description:
+      "Enlazá tu base de datos y empezá a ver ingresos, clientes y tráfico sin configurar nada extra.",
+  },
+  {
+    number: "02",
+    title: "Mirá el panorama completo",
+    description:
+      "Métricas calculadas en vivo, sin exportar planillas ni armar reportes a mano.",
+  },
+  {
+    number: "03",
+    title: "Tomá decisiones a tiempo",
+    description:
+      "Detectá caídas de conversión o clientes en riesgo antes de que se conviertan en un problema.",
+  },
+];
+
+const FEATURES = [
+  {
+    title: "Métricas en vivo",
+    description:
+      "Ingresos, usuarios activos y conversión actualizados sin exportar nada.",
+  },
+  {
+    title: "Acceso seguro",
+    description:
+      "Autenticación gestionada con sesiones y roles, sin código extra.",
+  },
+  {
+    title: "Datos en tiempo real",
+    description: "Las tablas se sincronizan con el panel al instante.",
+  },
+  {
+    title: "Seguridad por fila",
+    description:
+      "Cada usuario accede solo a su propia información, protegida a nivel de base de datos.",
+  },
+  {
+    title: "Pensado para equipos chicos",
+    description:
+      "Sin curva de aprendizaje: lo que necesitás ver está a un clic, no enterrado en menús.",
+  },
+  {
+    title: "100% responsive",
+    description:
+      "El mismo panel, cómodo de usar, desde el escritorio o desde el celular.",
+  },
+];
+
+const STACK = [
+  "Next.js",
+  "TypeScript",
+  "Tailwind CSS",
+  "Clerk",
+  "Supabase",
+  "Vercel",
+];
 
 export default async function HomePage() {
   const { userId } = await auth();
@@ -45,6 +108,7 @@ export default async function HomePage() {
         </nav>
       </header>
 
+      {/* Hero */}
       <section className="mx-auto grid max-w-6xl grid-cols-1 gap-16 px-6 py-16 md:grid-cols-2 md:items-center md:py-24">
         <div>
           <h1 className="font-display text-4xl italic leading-[1.1] tracking-tight sm:text-5xl">
@@ -87,7 +151,7 @@ export default async function HomePage() {
             {CONSOLE_BARS.map((height, i) => (
               <div
                 key={i}
-                className="flex-1 rounded-t-sm bg-signal/70 last:bg-signal"
+                className="flex-1 rounded-t-sm bg-signal/70 transition-all duration-300 hover:bg-signal last:bg-signal"
                 style={{ height: `${height}%` }}
               />
             ))}
@@ -95,39 +159,119 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl divide-y divide-line border-y border-line px-6">
-        <FeatureRow
-          title="Métricas en vivo"
-          description="Ingresos, usuarios activos y conversión actualizados sin exportar nada."
-        />
-        <FeatureRow
-          title="Acceso seguro"
-          description="Autenticación gestionada con sesiones y roles, sin código extra."
-        />
-        <FeatureRow
-          title="Datos en tiempo real"
-          description="Las tablas se sincronizan con el panel al instante."
-        />
+      {/* Cómo funciona */}
+      <section className="mx-auto max-w-6xl border-y border-line px-6 py-16">
+        <h2 className="font-display text-2xl italic">Cómo funciona</h2>
+        <div className="mt-10 grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8">
+          {STEPS.map((step) => (
+            <div key={step.number}>
+              <span className="font-mono text-sm text-signal">
+                {step.number}
+              </span>
+              <h3 className="mt-3 font-display text-lg">{step.title}</h3>
+              <p className="mt-2 text-sm text-muted">{step.description}</p>
+            </div>
+          ))}
+        </div>
       </section>
 
-      <footer className="mx-auto max-w-6xl px-6 py-10 text-xs text-muted">
-        Nimbus — panel de control para equipos SaaS.
+      {/* Features */}
+      <section className="mx-auto max-w-6xl px-6 py-16">
+        <h2 className="font-display text-2xl italic">
+          Todo lo que necesitás, nada de lo que no
+        </h2>
+        <div className="mt-10 divide-y divide-line border-y border-line">
+          {FEATURES.map((feature) => (
+            <div
+              key={feature.title}
+              className="grid grid-cols-1 gap-2 py-7 transition-colors hover:bg-surface/40 sm:grid-cols-[220px_1fr] sm:gap-8 sm:px-2"
+            >
+              <h3 className="font-display text-lg">{feature.title}</h3>
+              <p className="max-w-md text-sm text-muted">
+                {feature.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Stack técnico */}
+      <section className="border-y border-line">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-10 gap-y-4 px-6 py-8">
+          <span className="font-mono text-xs text-muted">Construido con</span>
+          {STACK.map((tech) => (
+            <span key={tech} className="font-mono text-sm text-muted">
+              {tech}
+            </span>
+          ))}
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="mx-auto max-w-3xl px-6 py-16">
+        <h2 className="font-display text-2xl italic">Preguntas frecuentes</h2>
+        <div className="mt-8">
+          <Faq />
+        </div>
+      </section>
+
+      {/* CTA final */}
+      <section className="mx-auto max-w-6xl px-6 py-16 text-center">
+        <h2 className="font-display text-3xl italic">
+          Probalo, es gratis.
+        </h2>
+        <Link
+          href="/sign-up"
+          className="mt-6 inline-block rounded-full bg-signal px-6 py-3 text-sm font-medium text-signal-ink transition hover:opacity-90"
+        >
+          Crear cuenta
+        </Link>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-line">
+        <div className="mx-auto grid max-w-6xl grid-cols-2 gap-8 px-6 py-12 sm:grid-cols-4">
+          <div className="col-span-2 sm:col-span-1">
+            <span className="font-display text-lg italic">Nimbus</span>
+            <p className="mt-2 text-xs text-muted">
+              Panel de control para equipos SaaS.
+            </p>
+          </div>
+          <div>
+            <p className="text-xs text-muted">Producto</p>
+            <ul className="mt-3 space-y-2 text-sm">
+              <li>
+                <Link href="/sign-up" className="text-ink hover:text-signal">
+                  Crear cuenta
+                </Link>
+              </li>
+              <li>
+                <Link href="/sign-in" className="text-ink hover:text-signal">
+                  Iniciar sesión
+                </Link>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <p className="text-xs text-muted">Proyecto</p>
+            <ul className="mt-3 space-y-2 text-sm">
+              <li>
+                <a
+                  href="https://github.com/danilolobato/saas-admin.git"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-ink hover:text-signal"
+                >
+                  Código en GitHub
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div className="border-t border-line px-6 py-6 text-center text-xs text-muted">
+          Nimbus — proyecto de portafolio, construido con Next.js y Supabase.
+        </div>
       </footer>
     </main>
-  );
-}
-
-function FeatureRow({
-  title,
-  description,
-}: {
-  title: string;
-  description: string;
-}) {
-  return (
-    <div className="grid grid-cols-1 gap-2 py-8 sm:grid-cols-[200px_1fr] sm:gap-8">
-      <h3 className="font-display text-lg">{title}</h3>
-      <p className="max-w-md text-sm text-muted">{description}</p>
-    </div>
   );
 }
