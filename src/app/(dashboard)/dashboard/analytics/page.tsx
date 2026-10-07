@@ -82,7 +82,7 @@ export default async function AnalyticsPage() {
             </thead>
             <tbody className="divide-y divide-line">
               {customerList.map((customer) => (
-                <tr key={customer.id}>
+                <tr key={customer.id} className="transition-colors hover:bg-surface-raised">
                   <td className="px-6 py-4">
                     <div className="text-ink">{customer.name}</div>
                     <div className="text-xs text-muted">{customer.email}</div>
