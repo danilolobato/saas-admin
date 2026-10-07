@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { auth } from "@clerk/nextjs/server";
 import { Faq } from "@/components/landing/Faq";
+import { Reveal } from "@/components/landing/Reveal";
 
 const CONSOLE_STATS = [
   { label: "MRR", value: "$42,890" },
@@ -85,7 +86,7 @@ export default async function HomePage() {
           {userId ? (
             <Link
               href="/dashboard"
-              className="rounded-full bg-signal px-5 py-2 font-medium text-signal-ink transition hover:opacity-90"
+              className="rounded-full bg-signal px-5 py-2 font-medium text-signal-ink transition hover:scale-105 hover:opacity-90 active:scale-95"
             >
               Ir al panel
             </Link>
@@ -99,7 +100,7 @@ export default async function HomePage() {
               </Link>
               <Link
                 href="/sign-up"
-                className="rounded-full bg-signal px-5 py-2 font-medium text-signal-ink transition hover:opacity-90"
+                className="rounded-full bg-signal px-5 py-2 font-medium text-signal-ink transition hover:scale-105 hover:opacity-90 active:scale-95"
               >
                 Crear cuenta
               </Link>
@@ -121,7 +122,7 @@ export default async function HomePage() {
           <div className="mt-8 flex items-center gap-6">
             <Link
               href="/sign-up"
-              className="rounded-full bg-signal px-6 py-3 text-sm font-medium text-signal-ink transition hover:opacity-90"
+              className="rounded-full bg-signal px-5 py-2 font-medium text-signal-ink transition hover:scale-105 hover:opacity-90 active:scale-95"
             >
               Empezar gratis
             </Link>
@@ -159,74 +160,93 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Cómo funciona */}
-      <section className="mx-auto max-w-6xl border-y border-line px-6 py-16">
-        <h2 className="font-display text-2xl italic">Cómo funciona</h2>
-        <div className="mt-10 grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8">
-          {STEPS.map((step) => (
-            <div key={step.number}>
-              <span className="font-mono text-sm text-signal">
-                {step.number}
-              </span>
-              <h3 className="mt-3 font-display text-lg">{step.title}</h3>
-              <p className="mt-2 text-sm text-muted">{step.description}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+            {/* Cómo funciona */}
+      <Reveal>
+        <section className="mx-auto max-w-6xl border-y border-line px-6 py-16">
+          <h2 className="font-display text-2xl italic">Cómo funciona</h2>
+          <div className="mt-10 grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8">
+            {STEPS.map((step, i) => (
+              <Reveal key={step.number} delay={i * 100}>
+                <div>
+                  <span className="font-mono text-sm text-signal">
+                    {step.number}
+                  </span>
+                  <h3 className="mt-3 font-display text-lg">{step.title}</h3>
+                  <p className="mt-2 text-sm text-muted">
+                    {step.description}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+      </Reveal>
 
       {/* Features */}
-      <section className="mx-auto max-w-6xl px-6 py-16">
-        <h2 className="font-display text-2xl italic">
-          Todo lo que necesitás, nada de lo que no
-        </h2>
-        <div className="mt-10 divide-y divide-line border-y border-line">
-          {FEATURES.map((feature) => (
-            <div
-              key={feature.title}
-              className="grid grid-cols-1 gap-2 py-7 transition-colors hover:bg-surface/40 sm:grid-cols-[220px_1fr] sm:gap-8 sm:px-2"
-            >
-              <h3 className="font-display text-lg">{feature.title}</h3>
-              <p className="max-w-md text-sm text-muted">
-                {feature.description}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
+      <Reveal>
+        <section className="mx-auto max-w-6xl px-6 py-16">
+          <h2 className="font-display text-2xl italic">
+            Todo lo que necesitás, nada de lo que no
+          </h2>
+          <div className="mt-10 divide-y divide-line border-y border-line">
+            {FEATURES.map((feature) => (
+              <div
+                key={feature.title}
+                className="grid grid-cols-1 gap-2 py-7 transition-colors hover:bg-surface/40 sm:grid-cols-[220px_1fr] sm:gap-8 sm:px-2"
+              >
+                <h3 className="font-display text-lg">{feature.title}</h3>
+                <p className="max-w-md text-sm text-muted">
+                  {feature.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+      </Reveal>
 
       {/* Stack técnico */}
-      <section className="border-y border-line">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-10 gap-y-4 px-6 py-8">
-          <span className="font-mono text-xs text-muted">Construido con</span>
-          {STACK.map((tech) => (
-            <span key={tech} className="font-mono text-sm text-muted">
-              {tech}
+      <Reveal>
+        <section className="border-y border-line">
+          <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-10 gap-y-4 px-6 py-8">
+            <span className="font-mono text-xs text-muted">
+              Construido con
             </span>
-          ))}
-        </div>
-      </section>
+            {STACK.map((tech) => (
+              <span
+                key={tech}
+                className="font-mono text-sm text-muted transition-colors hover:text-signal"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+        </section>
+      </Reveal>
 
       {/* FAQ */}
-      <section className="mx-auto max-w-3xl px-6 py-16">
-        <h2 className="font-display text-2xl italic">Preguntas frecuentes</h2>
-        <div className="mt-8">
-          <Faq />
-        </div>
-      </section>
+      <Reveal>
+        <section className="mx-auto max-w-3xl px-6 py-16">
+          <h2 className="font-display text-2xl italic">
+            Preguntas frecuentes
+          </h2>
+          <div className="mt-8">
+            <Faq />
+          </div>
+        </section>
+      </Reveal>
 
       {/* CTA final */}
-      <section className="mx-auto max-w-6xl px-6 py-16 text-center">
-        <h2 className="font-display text-3xl italic">
-          Probalo, es gratis.
-        </h2>
-        <Link
-          href="/sign-up"
-          className="mt-6 inline-block rounded-full bg-signal px-6 py-3 text-sm font-medium text-signal-ink transition hover:opacity-90"
-        >
-          Crear cuenta
-        </Link>
-      </section>
+      <Reveal>
+        <section className="mx-auto max-w-6xl px-6 py-16 text-center">
+          <h2 className="font-display text-3xl italic">Probalo, es gratis.</h2>
+          <Link
+            href="/sign-up"
+            className="rounded-full bg-signal px-5 py-2 font-medium text-signal-ink transition hover:scale-105 hover:opacity-90 active:scale-95"
+          >
+            Crear cuenta
+          </Link>
+        </section>
+      </Reveal>
 
       {/* Footer */}
       <footer className="border-t border-line">
