@@ -51,7 +51,7 @@ export function SettingsForm({
           name="notifyByEmail"
           type="checkbox"
           defaultChecked={initialNotifyByEmail}
-          className="h-5 w-5 rounded border-line bg-canvas accent-[#D9A62E]"
+          className="h-5 w-5 rounded border-line bg-canvas accent-[#E8936B]"
         />
       </div>
 

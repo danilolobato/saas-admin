@@ -14,13 +14,13 @@ export default function OpengraphImage() {
           flexDirection: "column",
           justifyContent: "center",
           padding: "80px",
-          background: "#131110",
+          background: "#19131C",
         }}
       >
         <span
           style={{
             fontSize: 28,
-            color: "#9C9488",
+            color: "#A89AA8",
             marginBottom: 24,
           }}
         >
@@ -31,7 +31,7 @@ export default function OpengraphImage() {
             fontSize: 64,
             fontStyle: "italic",
             fontWeight: 600,
-            color: "#F2EEE7",
+            color: "#F5EEF2",
             lineHeight: 1.2,
             maxWidth: 900,
           }}
@@ -51,7 +51,7 @@ export default function OpengraphImage() {
               style={{
                 width: 28,
                 height: h,
-                background: "#D9A62E",
+                background: "#E8936B",
                 borderRadius: 3,
               }}
             />

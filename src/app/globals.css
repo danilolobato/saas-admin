@@ -1,18 +1,14 @@
 @import "tailwindcss";
 
-html {
-  scroll-behavior: smooth;
-}
-
 :root {
-  --color-canvas: #131110;
-  --color-surface: #1c1a18;
-  --color-surface-raised: #242220;
-  --color-line: #34302c;
-  --color-ink: #f2eee7;
-  --color-muted: #9c9488;
-  --color-signal: #d9a62e;
-  --color-signal-ink: #131110;
+  --color-canvas: #19131c;
+  --color-surface: #241b28;
+  --color-surface-raised: #2e2230;
+  --color-line: #3e2f40;
+  --color-ink: #f5eef2;
+  --color-muted: #a89aa8;
+  --color-signal: #e8936b;
+  --color-signal-ink: #19131c;
   --color-alert: #e35b4f;
 }
 
@@ -40,4 +36,8 @@ body {
 ::selection {
   background: var(--color-signal);
   color: var(--color-signal-ink);
+}
+
+html {
+  scroll-behavior: smooth;
 }

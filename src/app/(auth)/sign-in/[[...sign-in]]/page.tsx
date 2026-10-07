@@ -6,12 +6,12 @@ export default function SignInPage() {
       <SignIn
         appearance={{
           variables: {
-  colorPrimary: "#D9A62E",
-  colorBackground: "#1C1A18",
-  colorForeground: "#F2EEE7",
-  colorMutedForeground: "#9C9488",
-  colorInput: "#131110",
-  colorInputForeground: "#F2EEE7",
+  colorPrimary: "#E8936B",
+  colorBackground: "#241B28",
+  colorForeground: "#F5EEF2",
+  colorMutedForeground: "#A89AA8",
+  colorInput: "#19131C",
+  colorInputForeground: "#F5EEF2",
   borderRadius: "0.75rem",
 },
           elements: {
