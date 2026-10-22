@@ -2,11 +2,12 @@ import Link from "next/link";
 import { auth } from "@clerk/nextjs/server";
 import { Faq } from "@/components/landing/Faq";
 import { Reveal } from "@/components/landing/Reveal";
+import { CountUp } from "@/components/CountUp";
 
 const CONSOLE_STATS = [
-  { label: "MRR", value: "$42,890" },
-  { label: "Clientes activos", value: "184" },
-  { label: "Conversión", value: "3.2%" },
+  { label: "MRR", value: 42890, prefix: "$", suffix: "", decimals: 0 },
+  { label: "Clientes activos", value: 184, prefix: "", suffix: "", decimals: 0 },
+  { label: "Conversión", value: 3.2, prefix: "", suffix: "%", decimals: 1 },
 ];
 
 const CONSOLE_BARS = [30, 45, 38, 52, 61, 55, 70, 64, 78, 72, 85, 90];
@@ -78,7 +79,7 @@ export default async function HomePage() {
 
   return (
     <main className="min-h-screen bg-canvas text-ink">
-      <header className="mx-auto flex max-w-6xl items-center justify-between px-6 py-8">
+      <header className="mx-auto flex max-w-6xl animate-fade-in items-center justify-between px-6 py-8">
         <span className="font-display text-xl italic tracking-tight">
           Nimbus
         </span>
@@ -86,7 +87,7 @@ export default async function HomePage() {
           {userId ? (
             <Link
               href="/dashboard"
-              className="rounded-full bg-signal px-5 py-2 font-medium text-signal-ink transition hover:scale-105 hover:opacity-90 active:scale-95"
+              className="btn-shimmer rounded-full bg-signal px-5 py-2 font-medium text-signal-ink transition hover:scale-105 active:scale-95"
             >
               Ir al panel
             </Link>
@@ -100,7 +101,7 @@ export default async function HomePage() {
               </Link>
               <Link
                 href="/sign-up"
-                className="rounded-full bg-signal px-5 py-2 font-medium text-signal-ink transition hover:scale-105 hover:opacity-90 active:scale-95"
+                className="btn-shimmer rounded-full bg-signal px-5 py-2 font-medium text-signal-ink transition hover:scale-105 active:scale-95"
               >
                 Crear cuenta
               </Link>
@@ -110,63 +111,110 @@ export default async function HomePage() {
       </header>
 
       {/* Hero */}
-      <section className="mx-auto grid max-w-6xl grid-cols-1 gap-16 px-6 py-16 md:grid-cols-2 md:items-center md:py-24">
-        <div>
-          <h1 className="font-display text-4xl italic leading-[1.1] tracking-tight sm:text-5xl">
-            Todo lo que pasa en tu producto, en una sola pantalla.
-          </h1>
-          <p className="mt-6 max-w-md text-muted">
-            Ingresos, clientes y tráfico conectados en un panel que se lee de
-            un vistazo, sin exportar nada a una hoja de cálculo.
-          </p>
-          <div className="mt-8 flex items-center gap-6">
-            <Link
-              href="/sign-up"
-              className="rounded-full bg-signal px-5 py-2 font-medium text-signal-ink transition hover:scale-105 hover:opacity-90 active:scale-95"
-            >
-              Empezar gratis
-            </Link>
-            <Link
-              href="/sign-in"
-              className="text-sm text-muted transition hover:text-ink"
-            >
-              Ya tengo cuenta
-            </Link>
-          </div>
-        </div>
+      <section className="relative isolate overflow-hidden">
+        {/* Fondo ambiental: brillos que respiran + grilla desvanecida */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -left-32 top-0 -z-10 h-96 w-96 animate-glow rounded-full bg-signal/20 blur-3xl"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -right-24 top-32 -z-10 h-96 w-96 animate-glow rounded-full bg-[#7a4a8c]/30 blur-3xl [animation-delay:2s]"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 -z-10 opacity-30 [background-image:linear-gradient(to_right,var(--color-line)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-line)_1px,transparent_1px)] [background-size:64px_64px] [-webkit-mask-image:radial-gradient(ellipse_at_center,black_25%,transparent_72%)] [mask-image:radial-gradient(ellipse_at_center,black_25%,transparent_72%)]"
+        />
 
-        <div className="rounded-2xl border border-line bg-surface p-6">
-          <div className="flex items-center justify-between border-b border-line pb-4">
-            <span className="font-mono text-xs text-muted">Resumen de hoy</span>
-            <span className="h-2 w-2 rounded-full bg-signal" />
+        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-16 px-6 py-16 md:grid-cols-2 md:items-center md:py-24">
+          <div>
+            <h1
+              className="animate-fade-up font-display text-4xl italic leading-[1.1] tracking-tight sm:text-5xl"
+              style={{ animationDelay: "100ms" }}
+            >
+              Todo lo que pasa en tu producto, en una sola pantalla.
+            </h1>
+            <p
+              className="mt-6 max-w-md animate-fade-up text-muted"
+              style={{ animationDelay: "250ms" }}
+            >
+              Ingresos, clientes y tráfico conectados en un panel que se lee de
+              un vistazo, sin exportar nada a una hoja de cálculo.
+            </p>
+            <div
+              className="mt-8 flex animate-fade-up items-center gap-6"
+              style={{ animationDelay: "400ms" }}
+            >
+              <Link
+                href="/sign-up"
+                className="btn-shimmer rounded-full bg-signal px-6 py-3 text-sm font-medium text-signal-ink shadow-[0_0_32px_-6px_var(--color-signal)] transition hover:scale-105 active:scale-95"
+              >
+                Empezar gratis
+              </Link>
+              <Link
+                href="/sign-in"
+                className="text-sm text-muted transition hover:text-ink"
+              >
+                Ya tengo cuenta
+              </Link>
+            </div>
           </div>
-          <div className="grid grid-cols-3 divide-x divide-line py-5">
-            {CONSOLE_STATS.map((stat) => (
-              <div key={stat.label} className="px-4 first:pl-0 last:pr-0">
-                <p className="text-xs text-muted">{stat.label}</p>
-                <p className="mt-1 font-mono text-lg text-ink">{stat.value}</p>
+
+          {/* Consola de datos: entra y después flota suavemente */}
+          <div
+            className="animate-fade-up"
+            style={{ animationDelay: "350ms" }}
+          >
+            <div className="animate-float rounded-2xl border border-line bg-surface/90 p-6 shadow-2xl shadow-black/40 backdrop-blur">
+              <div className="flex items-center justify-between border-b border-line pb-4">
+                <span className="font-mono text-xs text-muted">
+                  Resumen de hoy
+                </span>
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-signal opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-signal" />
+                </span>
               </div>
-            ))}
-          </div>
-          <div className="flex h-24 items-end gap-1.5 border-t border-line pt-5">
-            {CONSOLE_BARS.map((height, i) => (
-              <div
-                key={i}
-                className="flex-1 rounded-t-sm bg-signal/70 transition-all duration-300 hover:bg-signal last:bg-signal"
-                style={{ height: `${height}%` }}
-              />
-            ))}
+              <div className="grid grid-cols-3 divide-x divide-line py-5">
+                {CONSOLE_STATS.map((stat) => (
+                  <div key={stat.label} className="px-4 first:pl-0 last:pr-0">
+                    <p className="text-xs text-muted">{stat.label}</p>
+                    <p className="mt-1 font-mono text-lg text-ink">
+                      <CountUp
+                        value={stat.value}
+                        prefix={stat.prefix}
+                        suffix={stat.suffix}
+                        decimals={stat.decimals}
+                      />
+                    </p>
+                  </div>
+                ))}
+              </div>
+              <div className="flex h-24 items-end gap-1.5 border-t border-line pt-5">
+                {CONSOLE_BARS.map((height, i) => (
+                  <div
+                    key={i}
+                    className="animate-grow-bar flex-1 rounded-t-sm bg-signal/70 transition-colors duration-300 hover:bg-signal last:bg-signal"
+                    style={{
+                      height: `${height}%`,
+                      transformOrigin: "bottom",
+                      animationDelay: `${700 + i * 70}ms`,
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-            {/* Cómo funciona */}
+      {/* Cómo funciona */}
       <Reveal>
         <section className="mx-auto max-w-6xl border-y border-line px-6 py-16">
           <h2 className="font-display text-2xl italic">Cómo funciona</h2>
           <div className="mt-10 grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8">
             {STEPS.map((step, i) => (
-              <Reveal key={step.number} delay={i * 100}>
+              <Reveal key={step.number} delay={i * 120}>
                 <div>
                   <span className="font-mono text-sm text-signal">
                     {step.number}
@@ -241,7 +289,7 @@ export default async function HomePage() {
           <h2 className="font-display text-3xl italic">Probalo, es gratis.</h2>
           <Link
             href="/sign-up"
-            className="mt-6 inline-block rounded-full bg-signal px-6 py-3 text-sm font-medium text-signal-ink transition hover:scale-105 hover:opacity-90 active:scale-95"
+            className="btn-shimmer mt-6 inline-block rounded-full bg-signal px-6 py-3 text-sm font-medium text-signal-ink shadow-[0_0_32px_-6px_var(--color-signal)] transition hover:scale-105 active:scale-95"
           >
             Crear cuenta
           </Link>
@@ -277,7 +325,7 @@ export default async function HomePage() {
             <ul className="mt-3 space-y-2 text-sm">
               <li>
                 <a
-                  href="https://github.com/danilolobato/saas-admin.git"
+                  href="https://saas-admin-flax.vercel.app/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-ink hover:text-signal"
