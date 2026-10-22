@@ -26,6 +26,9 @@ const statusLabel: Record<Customer["status"], string> = {
   churned: "Cancelado",
 };
 
+const panelHover =
+  "transition-all duration-300 hover:border-signal/30 hover:shadow-[0_0_48px_-16px_var(--color-signal)]";
+
 export default async function AnalyticsPage() {
   const { userId } = await auth();
   const supabase = createAdminClient();
@@ -47,14 +50,20 @@ export default async function AnalyticsPage() {
 
   return (
     <div className="space-y-8">
-      <div>
+      <div className="animate-fade-up">
         <h2 className="font-display text-2xl italic">Analíticas</h2>
         <p className="mt-1 text-sm text-muted">
           Origen de tráfico y detalle de clientes.
         </p>
       </div>
 
-      <div className="rounded-xl border border-line bg-surface p-6">
+      <div
+        className={cn(
+          "animate-fade-up rounded-xl border border-line bg-surface p-6",
+          panelHover
+        )}
+        style={{ animationDelay: "120ms" }}
+      >
         <h3 className="mb-4 text-sm text-muted">
           Sesiones y conversiones por canal
         </h3>
@@ -69,7 +78,13 @@ export default async function AnalyticsPage() {
         )}
       </div>
 
-      <div className="overflow-hidden rounded-xl border border-line bg-surface">
+      <div
+        className={cn(
+          "animate-fade-up overflow-hidden rounded-xl border border-line bg-surface",
+          panelHover
+        )}
+        style={{ animationDelay: "240ms" }}
+      >
         {customerList.length > 0 ? (
           <table className="w-full text-left text-sm">
             <thead className="border-b border-line text-muted">
@@ -81,8 +96,12 @@ export default async function AnalyticsPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-line">
-              {customerList.map((customer) => (
-                <tr key={customer.id} className="transition-colors hover:bg-surface-raised">
+              {customerList.map((customer, i) => (
+                <tr
+                  key={customer.id}
+                  className="animate-fade-up transition-colors hover:bg-surface-raised"
+                  style={{ animationDelay: `${360 + i * 70}ms` }}
+                >
                   <td className="px-6 py-4">
                     <div className="text-ink">{customer.name}</div>
                     <div className="text-xs text-muted">{customer.email}</div>

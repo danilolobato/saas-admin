@@ -66,7 +66,7 @@ export default async function DashboardPage() {
 
   return (
     <div className="space-y-8">
-      <div>
+      <div className="animate-fade-up">
         <h2 className="font-display text-2xl italic">Resumen general</h2>
         <p className="mt-1 text-sm text-muted">
           Las métricas clave de tu producto esta semana.
@@ -77,19 +77,25 @@ export default async function DashboardPage() {
         stats={[
           {
             label: "Ingresos totales (MRR)",
-            value: `$${totalMrr.toLocaleString("es-AR")}`,
+            value: totalMrr,
+            prefix: "$",
             change: revenueChange,
           },
-          { label: "Clientes activos", value: activeCustomers.toString() },
-          { label: "Tasa de conversión", value: `${conversionRate}%` },
+          { label: "Clientes activos", value: activeCustomers },
           {
-            label: "Suscripciones pagas",
-            value: paidSubscriptions.toString(),
+            label: "Tasa de conversión",
+            value: conversionRate,
+            suffix: "%",
+            decimals: 1,
           },
+          { label: "Suscripciones pagas", value: paidSubscriptions },
         ]}
       />
 
-      <div className="rounded-xl border border-line bg-surface p-6">
+      <div
+        className="animate-fade-up rounded-xl border border-line bg-surface p-6 transition-all duration-300 hover:border-signal/30 hover:shadow-[0_0_48px_-16px_var(--color-signal)]"
+        style={{ animationDelay: "350ms" }}
+      >
         <h3 className="mb-4 text-sm text-muted">Ingresos por mes</h3>
         {revenue.length > 0 ? (
           <RevenueChart data={revenue} />

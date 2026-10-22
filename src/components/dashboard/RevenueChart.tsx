@@ -48,12 +48,14 @@ export function RevenueChart({ data }: { data: RevenuePoint[] }) {
             labelStyle={{ color: "#F5EEF2" }}
           />
           <Area
-            type="monotone"
-            dataKey="revenue"
-            stroke="#E8936B"
-            strokeWidth={2}
-            fill="url(#revenueFill)"
-          />
+  type="monotone"
+  dataKey="revenue"
+  stroke="#E8936B"
+  strokeWidth={2}
+  fill="url(#revenueFill)"
+  animationDuration={1400}
+  animationEasing="ease-out"
+/>
         </AreaChart>
       </ResponsiveContainer>
     </div>

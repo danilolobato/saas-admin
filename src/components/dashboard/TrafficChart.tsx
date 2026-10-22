@@ -42,8 +42,19 @@ export function TrafficChart({ data }: { data: TrafficPoint[] }) {
             labelStyle={{ color: "#F5EEF2" }}
           />
           <Legend wrapperStyle={{ fontSize: "12px", color: "#A89AA8" }} />
-          <Bar dataKey="sesiones" fill="#564258" radius={[4, 4, 0, 0]} />
-          <Bar dataKey="conversiones" fill="#E8936B" radius={[4, 4, 0, 0]} />
+          <Bar
+  dataKey="sesiones"
+  fill="#564258"
+  radius={[4, 4, 0, 0]}
+  animationDuration={1100}
+/>
+<Bar
+  dataKey="conversiones"
+  fill="#E8936B"
+  radius={[4, 4, 0, 0]}
+  animationBegin={250}
+  animationDuration={1100}
+/>
         </BarChart>
       </ResponsiveContainer>
     </div>

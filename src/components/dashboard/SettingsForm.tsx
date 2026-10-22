@@ -64,8 +64,8 @@ export function SettingsForm({
           {isPending ? "Guardando..." : "Guardar cambios"}
         </button>
         {saved && !isPending && (
-          <span className="text-sm text-signal">Guardado</span>
-        )}
+  <span className="animate-fade-in text-sm text-signal">Guardado</span>
+)}
       </div>
     </form>
   );
